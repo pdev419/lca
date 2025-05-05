@@ -52,7 +52,7 @@ const Page: NextPage<Props> = ({}) => {
           material={material}
           materialUnit={materialUnit}
           amount={amount}
-          setMaterial={setMaterial}
+          setMaterial={(value) => setMaterial(value as any)}
           setMaterialUnit={setMaterialUnit}
           setAmount={setAmount}
         />
@@ -64,10 +64,14 @@ const Page: NextPage<Props> = ({}) => {
           transportMethod={transportMethod}
           transportWeight={transportWeight}
           transportWeightUnit={transportWeightUnit}
-          setDistance={setDistance}
+          setDistance={(value: string) => setDistance(value as any)}
           setDistanceUnit={setDistanceUnit}
-          setTransportMethod={setTransportMethod}
-          setTransportWeight={setTransportWeight}
+          setTransportMethod={(value: string) =>
+            setTransportMethod(value as any)
+          }
+          setTransportWeight={(value: string) =>
+            setTransportWeight(value as any)
+          }
           setTransportWeightUnit={setTransportWeightUnit}
         />
       )}
@@ -75,8 +79,8 @@ const Page: NextPage<Props> = ({}) => {
         <EnergyInput
           energySource={energySource}
           consumption={consumption}
-          setEnergySource={setEnergySource}
-          setConsumption={setConsumption}
+          setEnergySource={(value: string) => setEnergySource(value as any)}
+          setConsumption={(value: string) => setConsumption(value as any)}
         />
       )}
       {currentTab === "Waste" && (
@@ -84,8 +88,8 @@ const Page: NextPage<Props> = ({}) => {
           wasteType={wasteType}
           wasteQuantity={wasteQuantity}
           wasteQuantityUnit={wastQuantityUnit}
-          setWasteType={setWasteType}
-          setWasteQuantity={setWasteQuantity}
+          setWasteType={(value: string) => setWasteType(value as any)}
+          setWasteQuantity={(value: string) => setWasteQuantity(value as any)}
           setWasteQuantityUnit={setWasteQuantityUnit}
         />
       )}
