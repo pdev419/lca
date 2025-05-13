@@ -9,11 +9,12 @@ import Button from "@/app/ui/button";
 import ResultChartClient, { ChartMethods } from "./result-chart-client";
 import { calculateResult } from "@/app/utils/calculate_result";
 
-interface ResultPageProps {
+type ResultPageProps = {
   params: {
     id: string;
   };
-}
+  searchParams?: { [key: string]: string | string[] | undefined };
+};
 
 async function getCalculationResult(id: string) {
   try {
