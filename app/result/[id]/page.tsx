@@ -38,7 +38,7 @@ async function getCalculationResult(id: string) {
       calc_log,
     ] = await calculateResult(data);
 
-    await saveResult(data.id, result, resultUnit);
+    await saveResult(data.id, result.toString(), resultUnit as string);
 
     return {
       ...data,
