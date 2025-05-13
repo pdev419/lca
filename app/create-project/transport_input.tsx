@@ -55,7 +55,7 @@ const TransportInput: NextPage<Props> = ({
       </InputRow>
       <InputRow label="Method">
         <Dropdown
-          options={["Truck", "Airplane", "Ship"]}
+          options={["Truck (EURO 6)", "Air Freight", "Sea Freight"]}
           value={transportMethod}
           placeholder="Select Method"
           onChange={setTransportMethod}

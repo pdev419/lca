@@ -10,21 +10,21 @@ import { handleNumberInput } from "../utils/handle_number_input";
 
 interface Props {
   material?: string;
-  materialUnit?: string;
+  amountUnit?: string;
   amount?: string;
   setMaterial: (material: string | undefined) => void;
-  setMaterialUnit: (materialUnit: string) => void;
+  setAmountUnit: (amountUnit: string) => void;
   setAmount: (amount: string) => void;
 }
 
-const material_list = ["Aluminum", "Iron", "Gold", "Silber", "Copper"];
+const material_list = ["Aluminum", "Steel", "Recycled Paper"];
 
 const MaterialsInput: NextPage<Props> = ({
   material,
-  materialUnit,
+  amountUnit,
   amount,
   setMaterial,
-  setMaterialUnit,
+  setAmountUnit,
   setAmount,
 }) => {
   return (
@@ -52,8 +52,8 @@ const MaterialsInput: NextPage<Props> = ({
           <div className="w-16 sm:w-20">
             <Dropdown
               options={["kg", "g", "t"]}
-              value={materialUnit}
-              onChange={setMaterialUnit}
+              value={amountUnit}
+              onChange={setAmountUnit}
             />
           </div>
         </div>

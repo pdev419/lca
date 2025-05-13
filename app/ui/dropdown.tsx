@@ -1,5 +1,6 @@
 "use client";
 
+import clsx from "clsx";
 import { NextPage } from "next";
 import React, { useState } from "react";
 
@@ -21,7 +22,10 @@ const Dropdown: NextPage<DropdownProps> = ({
   return (
     <div className="relative">
       <div
-        className="flex items-center justify-between w-full px-4 py-2 text-gray-600 bg-white border border-gray-300 rounded-md cursor-pointer hover:border-blue-300"
+        className={clsx(
+          "flex items-center justify-between w-full px-4 py-2 bg-white border border-gray-300 rounded-md cursor-pointer hover:border-blue-300",
+          value ? "text-gray-600" : "text-gray-400"
+        )}
         onClick={() => setIsOpen(!isOpen)}
       >
         <span className="text-2xl">{value ? value : placeholder}</span>

@@ -26,7 +26,11 @@ const WasteInput: NextPage<Props> = ({
     <div className="w-full mt-2 flex-1 flex flex-col gap-8 overflow-x-hidden overflow-y-auto">
       <InputRow label="Waste Type">
         <Dropdown
-          options={["Plastic"]}
+          options={[
+            "Plastic (Landfill)",
+            "Paper (Recycling)",
+            "Organic Waste (Compost)",
+          ]}
           value={wasteType}
           placeholder="Select Type"
           onChange={setWasteType}

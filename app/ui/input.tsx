@@ -31,7 +31,8 @@ const Input: NextPage<InputProps> = ({
           error ? "border-red-500" : "border-gray-300",
           fullWidth && "w-full"
         )}
-        value={value ? value : placeholder}
+        value={value}
+        placeholder={placeholder}
         onChange={(e) => onChange(e.target.value)}
       />
       {error && <p className="text-red-500 text-sm mt-1">{error}</p>}

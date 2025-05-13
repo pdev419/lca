@@ -1,13 +1,13 @@
 "use client";
 
 import clsx from "clsx";
-import { PlusIcon } from "@heroicons/react/24/solid";
 
 interface ButtonProps {
   fullWidth?: boolean;
   color?: string;
-  onClick: () => void;
+  onClick?: () => void;
   children: React.ReactNode;
+  disabled?: boolean;
 }
 
 export default function Button({
@@ -15,6 +15,7 @@ export default function Button({
   color = "blue",
   onClick = () => {},
   children,
+  disabled = false,
 }: ButtonProps) {
   return (
     <button
@@ -22,9 +23,11 @@ export default function Button({
         "flex flex-row justify-center items-center gap-2 px-16 py-4 leading-none rounded-xl text-2xl text-shadow-lg font-bold",
         fullWidth === true && "w-full",
         color === "blue" && "bg-blue-500 text-white hover:bg-blue-400",
-        color === "gray" && "bg-gray-100 text-black hover:bg-gray-200"
+        color === "gray" && "bg-gray-100 text-black hover:bg-gray-200",
+        disabled && "opacity-60 cursor-not-allowed"
       )}
       onClick={onClick}
+      disabled={disabled}
     >
       {children}
     </button>

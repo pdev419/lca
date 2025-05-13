@@ -22,7 +22,7 @@ const EnergyInput: NextPage<Props> = ({
     <div className="w-full mt-2 flex-1 flex flex-col gap-8 overflow-x-hidden overflow-y-auto">
       <InputRow label="Energy Source">
         <Dropdown
-          options={["Electricity, EU grid average"]}
+          options={["Electricity (EU Mix)", "Diesel", "Natural Gas"]}
           value={energySource}
           placeholder="Select Source"
           onChange={setEnergySource}
