@@ -1,7 +1,7 @@
 "use client";
 
 import { NextPage } from "next";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { supabase } from "../lib/supabase";
 
@@ -17,7 +17,8 @@ import Input from "../ui/input";
 
 interface Props {}
 
-const Page: NextPage<Props> = ({}) => {
+// Create a client component that uses useSearchParams
+function CreateProjectContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const projectId = searchParams.get("id");
@@ -257,23 +258,27 @@ const Page: NextPage<Props> = ({}) => {
           setWasteQuantityUnit={setWasteQuantityUnit}
         />
       )}
-      <div className="w-full mb-6">
+
+      <div className="w-full mt-auto sm:w-sm">
         <Button
-          onClick={saveProject}
           fullWidth={true}
           color="blue"
           disabled={isLoading}
+          onClick={saveProject}
         >
-          <div>
-            {isLoading
-              ? "Saving..."
-              : isEditMode
-              ? "Update & Calculate"
-              : "Calculate"}
-          </div>
+          <div>{isEditMode ? "Update" : "Create"}</div>
         </Button>
       </div>
     </div>
+  );
+}
+
+// This is the main page component with suspense boundary
+const Page: NextPage<Props> = ({}) => {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <CreateProjectContent />
+    </Suspense>
   );
 };
 
