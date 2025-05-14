@@ -7,7 +7,9 @@ import {
   EyeIcon,
   PencilIcon,
   ArrowDownTrayIcon,
+  TrashIcon,
 } from "@heroicons/react/24/outline";
+import { supabase } from "../lib/supabase";
 
 interface Props {
   id: string;
@@ -15,6 +17,7 @@ interface Props {
   result?: string;
   resultUnit?: string;
   editedAt: string;
+  onDelete?: () => void;
 }
 
 const IconButton = ({
@@ -24,7 +27,7 @@ const IconButton = ({
 }: {
   icon: React.ReactNode;
   label: string;
-  onClick: () => void;
+  onClick: (e: React.MouseEvent<HTMLDivElement>) => void;
 }) => {
   return (
     <div
@@ -45,8 +48,10 @@ const ProductCard: NextPage<Props> = ({
   result,
   resultUnit,
   editedAt,
+  onDelete,
 }) => {
   const [isFocused, setIsFocused] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
   const router = useRouter();
   const cardRef = useRef<HTMLDivElement>(null);
 
@@ -76,6 +81,34 @@ const ProductCard: NextPage<Props> = ({
     return date.toLocaleDateString();
   };
 
+  const handleDelete = async (e: React.MouseEvent) => {
+    e.stopPropagation();
+
+    if (window.confirm(`Are you sure you want to delete "${title}"?`)) {
+      try {
+        setIsDeleting(true);
+        const { error } = await supabase.from("project").delete().eq("id", id);
+
+        if (error) {
+          throw error;
+        }
+
+        // Call the onDelete callback if provided
+        if (onDelete) {
+          onDelete();
+        } else {
+          // Refresh the page if no callback is provided
+          router.refresh();
+        }
+      } catch (error) {
+        console.error("Error deleting project:", error);
+        alert("Failed to delete project");
+      } finally {
+        setIsDeleting(false);
+      }
+    }
+  };
+
   return (
     <div
       className={`w-full px-4 sm:px-6 py-6 sm:py-8 flex flex-row gap-4 rounded-xl font-bold border-gray-300 border-2 hover:border-blue-400 transition-colors duration-200 cursor-pointer ${
@@ -97,12 +130,23 @@ const ProductCard: NextPage<Props> = ({
               <IconButton
                 icon={<EyeIcon className="w-full h-full" />}
                 label="View result"
-                onClick={() => router.push(`/result/${id}`)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  router.push(`/result/${id}`);
+                }}
               />
               <IconButton
                 icon={<PencilIcon className="w-full h-full" />}
                 label="Edit project"
-                onClick={() => router.push(`/create-project?id=${id}`)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  router.push(`/create-project?id=${id}`);
+                }}
+              />
+              <IconButton
+                icon={<TrashIcon className="w-full h-full" />}
+                label="Delete project"
+                onClick={handleDelete}
               />
             </div>
           </div>

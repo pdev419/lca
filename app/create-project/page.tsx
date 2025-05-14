@@ -186,7 +186,7 @@ function CreateProjectContent() {
   };
 
   return (
-    <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 md:px-8 flex flex-col min-h-full">
+    <div className="w-full max-w-6xl items-center mx-auto px-4 sm:px-6 md:px-8 flex flex-col min-h-full">
       <Heading title={isEditMode ? "Edit Project" : "Create Project"} />
       {errorMessage && (
         <div className="w-full p-4 mb-4 bg-red-50 text-red-600 rounded-md">
@@ -204,7 +204,7 @@ function CreateProjectContent() {
           />
         </div>
       </div>
-      <div className="py-6">
+      <div className="w-full py-6">
         <TabView
           onChangeTab={(tab) => {
             setCurrentTab(tab);
@@ -259,7 +259,7 @@ function CreateProjectContent() {
         />
       )}
 
-      <div className="w-full mt-auto sm:w-sm">
+      <div className="w-full mt-6 mb-6 sm:w-sm">
         <Button
           fullWidth={true}
           color="blue"
